@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'mag',
+    'django_celery_results',
+
 ]
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TASK_SERIALIZER='json'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
