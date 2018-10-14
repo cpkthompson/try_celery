@@ -3,9 +3,11 @@ import os
 from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
+from decouple import config
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'try_celery.settings')
 
-app = Celery('try_celery')
+app = Celery('try_celery', broker=config('REDIS_URL'))
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
