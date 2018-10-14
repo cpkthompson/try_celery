@@ -14,6 +14,8 @@ import dj_database_url
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from decouple import config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -45,8 +47,12 @@ INSTALLED_APPS = [
 
 ]
 
-CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_BACKEND = config('REDIS_URL')
 CELERY_TASK_SERIALIZER='json'
+
+BROKER_URL = config('REDIS_URL')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
